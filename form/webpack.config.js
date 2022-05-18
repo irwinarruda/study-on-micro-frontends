@@ -8,6 +8,15 @@ const path = require('path');
 // Dependencies from package.json
 const PackageJsonDeps = PackageJson.dependencies;
 
+// Uses tsconfig paths dynamicly to create webpack aliases
+const TsConfigPaths = Object.entries(TsConfig.compilerOptions.paths).reduce(
+  (prev, [key, value]) => ({
+    ...prev,
+    [key.replace('/*', '')]: path.resolve(value[0].replace('/*', '').replace('*', '')),
+  }),
+  {},
+);
+
 /** @type {import('webpack').Configuration}  */
 module.exports = {
   mode: process.env.NODE_ENV,
@@ -34,7 +43,7 @@ module.exports = {
         host: 'host@http://localhost:3000/remoteEntry.js',
       },
       exposes: {
-        './render': './src/utils/render',
+        './render': './src/shared/utils/render',
       },
     }),
     new HtmlWebpackPlugin({
@@ -92,6 +101,7 @@ module.exports = {
   resolve: {
     alias: {
       vue$: 'vue/dist/vue.esm.js',
+      ...TsConfigPaths,
     },
     extensions: ['.ts', '.js', '.vue', '.json'],
   },

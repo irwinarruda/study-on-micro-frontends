@@ -1,10 +1,10 @@
 import Vue from 'vue';
-import App from '../App.vue';
+import Counter from '@app/components/Counter.vue';
 import vuetify from './vuetify';
 
 export function render(element: string) {
   new Vue({
     vuetify,
-    render: h => h(App),
+    render: h => h(Counter),
   }).$mount(element);
 }

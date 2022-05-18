@@ -31,7 +31,7 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: 'counter',
+      name: 'header',
       filename: 'remoteEntry.js',
       remotes: {
         host: 'host@http://localhost:3000/remoteEntry.js',

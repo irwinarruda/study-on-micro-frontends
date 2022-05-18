@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import App from './App.vue';
-import vuetify from './utils/vuetify';
+import vuetify from '@app/utils/vuetify';
 
 new Vue({
   vuetify,

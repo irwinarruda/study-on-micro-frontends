@@ -39,7 +39,7 @@ module.exports = {
       name: 'host',
       filename: 'remoteEntry.js',
       remotes: {
-        counter: 'counter@http://localhost:3001/remoteEntry.js',
+        header: 'header@http://localhost:3001/remoteEntry.js',
         form: 'form@http://localhost:3002/remoteEntry.js',
       },
       exposes: {

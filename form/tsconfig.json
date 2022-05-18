@@ -21,6 +21,11 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "outDir": "./types",
+    "paths": {
+      "@app/*": [
+        "src/shared/*"
+      ]
+    }
   },
   "include": [
     "**/*.ts",
