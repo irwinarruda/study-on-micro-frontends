@@ -16,8 +16,6 @@ import Vue from 'vue';
 import { observer } from 'mobx-vue';
 import { useStore } from 'host/Store';
 
-const { counter } = useStore();
-
 export default observer({
   name: 'App',
   data() {
