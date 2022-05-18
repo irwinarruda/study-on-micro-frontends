@@ -2,6 +2,7 @@ const ModuleFederationPlugin = require('webpack').container.ModuleFederationPlug
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
 const { VuetifyLoaderPlugin } = require('vuetify-loader');
+const TsConfig = require('./tsconfig.json');
 const PackageJson = require('./package.json');
 const path = require('path');
 

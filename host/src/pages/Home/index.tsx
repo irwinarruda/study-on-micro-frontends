@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Box, Button, Typography, Card } from '@mui/material';
-import { Counter } from 'counter/Counter';
+import { Counter } from 'header/Counter';
 import { render } from 'form/render';
 
 export const Home = () => {
