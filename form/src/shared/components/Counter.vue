@@ -32,4 +32,7 @@ export default observer({
 .v-application--is-ltr {
   background-color: initial !important;
 }
+.v-application--wrap {
+  min-height: 0px !important;
+}
 </style>

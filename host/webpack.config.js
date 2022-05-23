@@ -41,6 +41,7 @@ module.exports = {
       remotes: {
         header: 'header@http://localhost:3001/remoteEntry.js',
         form: 'form@http://localhost:3002/remoteEntry.js',
+        games: 'games@http://localhost:3003/remoteEntry.js',
       },
       exposes: {
         './Store': './src/shared/providers/Store',

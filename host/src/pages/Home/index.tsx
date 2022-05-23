@@ -1,15 +1,18 @@
 import React from 'react';
 
-import { Box, Button, Typography, Card } from '@mui/material';
+import { Box } from '@mui/material';
 import { Counter } from 'header/Counter';
-import { render } from 'form/render';
+import { render as vueRender } from 'form/render';
+import { render as svelteRender } from 'games/render';
 
 export const Home = () => {
   const vueRef = React.useRef<HTMLDivElement | null>(null);
+  const svelteRef = React.useRef<HTMLDivElement | null>(null);
   const once = React.useRef(false);
   React.useEffect(() => {
     if (!once.current) {
-      render(vueRef.current!);
+      vueRender(vueRef.current!);
+      svelteRender(svelteRef.current!);
       once.current = true;
     }
   }, []);
@@ -27,6 +30,7 @@ export const Home = () => {
     >
       <Counter />
       <div ref={vueRef}></div>
+      <div ref={svelteRef}></div>
     </Box>
   );
 };

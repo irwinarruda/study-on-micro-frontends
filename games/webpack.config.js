@@ -1,6 +1,7 @@
+const ModuleFederationPlugin = require('webpack').container.ModuleFederationPlugin;
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const preprocess = require('svelte-preprocess');
+const SveltePreprocess = require('svelte-preprocess');
 const TsConfig = require('./tsconfig.json');
 const PackageJson = require('./package.json');
 const path = require('path');
@@ -41,6 +42,16 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: '[name].css',
     }),
+    new ModuleFederationPlugin({
+      name: 'games',
+      filename: 'remoteEntry.js',
+      exposes: {
+        './render': './src/shared/utils/render',
+      },
+      remotes: {
+        host: 'host@http://localhost:3000/remoteEntry.js',
+      },
+    }),
   ],
   module: {
     rules: [
@@ -56,16 +67,21 @@ module.exports = {
       },
       {
         test: /\.svelte$/,
-        use: {
-          loader: 'svelte-loader',
-          options: {
-            compilerOptions: {
-              dev: !prod,
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env', '@babel/preset-typescript'],
             },
-            emitCss: prod,
-            hotReload: !prod,
           },
-        },
+          {
+            loader: 'svelte-loader',
+            options: {
+              emitCss: true,
+              preprocess: SveltePreprocess({}),
+            },
+          },
+        ],
       },
       {
         test: /\.css$/,

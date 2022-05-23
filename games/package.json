@@ -8,7 +8,8 @@
     "dev": "webpack-dev-server --mode development",
     "build": "webpack --mode development",
     "smui-theme": "smui-theme compile src/shared/styles/smui.css -i src/shared/styles",
-    "prepare": "yarn smui-theme"
+    "prepare": "yarn smui-theme",
+    "predev": "yarn smui-theme"
   },
   "devDependencies": {
     "@babel/core": "^7.17.12",
@@ -24,6 +25,7 @@
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.6.0",
     "prettier": "^2.6.2",
+    "sass": "^1.52.1",
     "smui-theme": "^6.0.0-beta.16",
     "style-loader": "^3.3.1",
     "svelte": "^3.48.0",
@@ -35,6 +37,6 @@
     "webpack-dev-server": "^4.9.0"
   },
   "dependencies": {
-    "svelte-material-ui": "^6.0.0-beta.16"
+    "svelte-mobx": "^1.0.0"
   }
 }

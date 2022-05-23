@@ -1,6 +1,3 @@
-import App from './App.svelte';
-import '@app/styles/smui.css';
+import('./bootstrap');
 
-new App({
-  target: document.getElementById('root'),
-});
+export {};
