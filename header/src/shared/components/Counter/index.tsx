@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Typography, Card } from '@mui/material';
+import { Button, Typography, Card, colors } from '@mui/material';
 import { observer } from 'mobx-react-lite';
 
 import { useStore } from 'host/Store';
@@ -12,7 +12,7 @@ export const Counter = observer(({}: CounterProps) => {
   const { counter } = useStore();
 
   return (
-    <Card sx={{ marginTop: 3, padding: 3 }}>
+    <Card sx={{ marginTop: 3, padding: 3, border: '2px solid', borderColor: colors.blue[500] }}>
       <Typography variant="h4">ReactJs Counter</Typography>
       <Typography variant="h6" sx={{ marginTop: 1 }}>
         {counter.count}

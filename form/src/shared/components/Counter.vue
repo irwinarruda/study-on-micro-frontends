@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-card class="pa-5 mt-5">
+    <v-card class="card-container pa-5 mt-5">
       <h1 class="font-weight-regular">VueJs Counter</h1>
       <h2 class="mt-1 font-weight-regular">{{ counter.count }}</h2>
       <div class="d-flex mt-2">
@@ -34,5 +34,8 @@ export default observer({
 }
 .v-application--wrap {
   min-height: 0px !important;
+}
+.card-container {
+  border: 2px solid #00897b !important;
 }
 </style>

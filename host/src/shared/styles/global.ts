@@ -4,6 +4,6 @@ export const global: SxProps<Theme> = {
   body: {
     margin: 0,
     minHeight: '100vh',
-    backgroundColor: 'darkgrey !important',
+    backgroundColor: '#8D6E63 !important',
   },
 };

@@ -24,7 +24,7 @@
 
 <Card marginheight={20}>
   <Content>
-    <h1 class="mdc-typography--headline4">SvelteJs Counter</h1>
+    <h1 class="mdc-typography--headline4">Svelte Counter</h1>
     <h2 class="mdc-typography--headline5">{count}</h2>
     <Button color="secondary" variant="raised" on:click={decrement}><Label>Decrement</Label></Button>
     <Button color="primary" variant="raised" on:click={increment}><Label>Increment</Label></Button>

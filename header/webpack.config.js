@@ -103,5 +103,6 @@ module.exports = {
     port: 3001,
     // Importante para ouvir mudanças e atualizar
     liveReload: true,
+    watchFiles: './src',
   },
 };

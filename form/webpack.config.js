@@ -1,7 +1,6 @@
 const ModuleFederationPlugin = require('webpack').container.ModuleFederationPlugin;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
-const { VuetifyLoaderPlugin } = require('vuetify-loader');
 const TsConfig = require('./tsconfig.json');
 const PackageJson = require('./package.json');
 const path = require('path');
@@ -54,7 +53,6 @@ module.exports = {
       inject: true,
     }),
     new VueLoaderPlugin(),
-    new VuetifyLoaderPlugin(),
   ],
   module: {
     rules: [
@@ -66,6 +64,7 @@ module.exports = {
             presets: ['@babel/preset-env', '@babel/preset-typescript'],
           },
         },
+        exclude: /node_modules/,
       },
       {
         test: /\.vue$/,
@@ -115,5 +114,7 @@ module.exports = {
     liveReload: true,
     port: 3002,
     historyApiFallback: true,
+    liveReload: true,
+    watchFiles: './src',
   },
 };
