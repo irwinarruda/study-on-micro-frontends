@@ -29,6 +29,7 @@ module.exports = {
     clean: true,
   },
   plugins: [
+    new VueLoaderPlugin(),
     new ModuleFederationPlugin({
       name: 'form',
       filename: 'remoteEntry.js',
@@ -52,7 +53,6 @@ module.exports = {
       scriptLoading: 'blocking',
       inject: true,
     }),
-    new VueLoaderPlugin(),
   ],
   module: {
     rules: [

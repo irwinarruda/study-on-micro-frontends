@@ -48,6 +48,9 @@ module.exports = {
       },
       shared: {
         ...PackageJsonDeps,
+        './src/shared/providers/Store': {
+          singleton: true,
+        },
         mobx: {
           singleton: true,
           requiredVersion: PackageJsonDeps.mobx,

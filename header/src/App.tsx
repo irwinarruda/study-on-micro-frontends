@@ -1,6 +1,9 @@
 import React from 'react';
-import { Card, Typography } from '@mui/material';
-import { Counter } from '@app/components/Counter';
+import { ThemeProvider, GlobalStyles, CssBaseline } from '@mui/material';
+
+import { Header } from '@app/components/Header';
+import { theme } from '@app/styles/theme';
+import { global } from '@app/styles/global';
 
 type AppProps = {
   children?: React.ReactNode;
@@ -8,11 +11,10 @@ type AppProps = {
 
 export const App = ({}: AppProps) => {
   return (
-    <div>
-      <Card sx={{ marginTop: 3, padding: 3 }}>
-        <Typography variant="h4">ReactJs Header</Typography>
-      </Card>
-      <Counter />
-    </div>
+    <ThemeProvider theme={theme}>
+      <GlobalStyles styles={global as any} />
+      <CssBaseline />
+      <Header />
+    </ThemeProvider>
   );
 };

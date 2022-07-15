@@ -38,6 +38,7 @@ module.exports = {
       },
       exposes: {
         './Counter': './src/shared/components/Counter',
+        './Header': './src/shared/components/Header',
       },
       shared: [
         {
