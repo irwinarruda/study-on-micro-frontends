@@ -1,4 +1,3 @@
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const ModuleFederationPlugin = require('webpack').container.ModuleFederationPlugin;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TsConfig = require('./tsconfig.json');
@@ -30,27 +29,23 @@ module.exports = {
     clean: true,
   },
   plugins: [
-    // new BundleAnalyzerPlugin({
-    //   analyzerMode: 'static',
-    //   openAnalyzer: false,
-    //   generateStatsFile: true,
-    // }),
     new ModuleFederationPlugin({
       name: 'host',
       filename: 'remoteEntry.js',
       remotes: {
+        host: 'host@http://localhost:3000/remoteEntry.js',
         header: 'header@http://localhost:3001/remoteEntry.js',
         form: 'form@http://localhost:3002/remoteEntry.js',
         games: 'games@http://localhost:3003/remoteEntry.js',
       },
       exposes: {
-        './Store': './src/shared/providers/Store',
+        './Store': './src/providers/Store',
       },
       shared: {
         ...PackageJsonDeps,
-        './src/shared/providers/Store': {
-          singleton: true,
-        },
+        // './src/providers/Store': {
+        //   singleton: true,
+        // },
         mobx: {
           singleton: true,
           requiredVersion: PackageJsonDeps.mobx,

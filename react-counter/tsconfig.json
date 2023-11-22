@@ -20,16 +20,16 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "baseUrl": ".",
-    "outDir": "./types",
+    "outDir": "./public/types",
     "paths": {
       "@app/*": [
-        "src/shared/*"
+        "src/*"
       ]
     }
   },
   "include": [
+    "next-env.d.ts",
     "**/*.ts",
-    "**/*.vue",
     "**/*.tsx"
   ],
   "exclude": [

@@ -23,7 +23,7 @@
     "outDir": "./types",
     "paths": {
       "@app/*": [
-        "src/shared/*"
+        "src/*"
       ],
       "@pages/*": [
         "src/pages/*"

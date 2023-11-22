@@ -1,6 +1,7 @@
 const ModuleFederationPlugin = require('webpack').container.ModuleFederationPlugin;
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { VueLoaderPlugin } = require('vue-loader');
+const SveltePreprocess = require('svelte-preprocess');
 const TsConfig = require('./tsconfig.json');
 const PackageJson = require('./package.json');
 const path = require('path');
@@ -17,9 +18,12 @@ const TsConfigPaths = Object.entries(TsConfig.compilerOptions.paths).reduce(
   {},
 );
 
-/** @type {import('webpack').Configuration}  */
+const mode = process.env.NODE_ENV || 'development';
+const prod = mode === 'production';
+
+/** @type {import('webpack').Configuration} */
 module.exports = {
-  mode: process.env.NODE_ENV,
+  mode: mode,
   entry: {
     main: path.join(__dirname, 'src', 'index.ts'),
   },
@@ -29,92 +33,82 @@ module.exports = {
     clean: true,
   },
   plugins: [
-    new VueLoaderPlugin(),
+    new HtmlWebpackPlugin({
+      minify: true,
+      inject: 'body',
+      scriptLoading: 'blocking',
+      template: path.join(__dirname, 'public', 'index.html'),
+    }),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+    }),
     new ModuleFederationPlugin({
-      name: 'form',
+      name: 'games',
       filename: 'remoteEntry.js',
-      shared: {
-        ...PackageJsonDeps,
-        mobx: {
-          singleton: true,
-          requiredVersion: PackageJsonDeps.mobx,
-        },
+      exposes: {
+        './render': './src/utils/render',
       },
       remotes: {
         host: 'host@http://localhost:3000/remoteEntry.js',
       },
-      exposes: {
-        './render': './src/shared/utils/render',
-      },
-    }),
-    new HtmlWebpackPlugin({
-      minify: true,
-      template: path.join(__dirname, 'public', 'index.html'),
-      scriptLoading: 'blocking',
-      inject: true,
     }),
   ],
   module: {
     rules: [
       {
-        test: /\.[tj]s$/,
+        test: /\.[tj]s/,
+        exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env', '@babel/preset-typescript'],
           },
         },
-        exclude: /node_modules/,
       },
       {
-        test: /\.vue$/,
-        use: 'vue-loader',
-      },
-      {
-        test: /\.css$/,
-        use: ['vue-style-loader', 'css-loader'],
-      },
-      {
-        test: /\.s(c|a)ss$/,
+        test: /\.svelte$/,
         use: [
-          'vue-style-loader',
-          'css-loader',
           {
-            loader: 'sass-loader',
-            // Requires sass-loader@^7.0.0
+            loader: 'babel-loader',
             options: {
-              implementation: require('sass'),
-              indentedSyntax: true, // optional
+              presets: ['@babel/preset-env', '@babel/preset-typescript'],
             },
-            // Requires >= sass-loader@^8.0.0
+          },
+          {
+            loader: 'svelte-loader',
             options: {
-              implementation: require('sass'),
-              sassOptions: {
-                indentedSyntax: true, // optional
-              },
+              emitCss: true,
+              preprocess: SveltePreprocess({}),
             },
           },
         ],
       },
+      {
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+      },
+      {
+        // required to prevent errors from Svelte on Webpack 5+
+        test: /node_modules\/svelte\/.*\.mjs$/,
+        resolve: {
+          fullySpecified: false,
+        },
+      },
     ],
   },
   resolve: {
-    alias: {
-      vue$: 'vue/dist/vue.esm.js',
-      ...TsConfigPaths,
-    },
-    extensions: ['.ts', '.js', '.vue', '.json'],
+    alias: TsConfigPaths,
+    extensions: ['.ts', '.js', '.svelte'],
   },
   devtool: 'source-map',
   devServer: {
     static: {
       directory: path.join(__dirname, 'public'),
     },
-    hot: 'only',
-    liveReload: true,
-    port: 3002,
+    port: 3003,
+    open: true,
     historyApiFallback: true,
+    hot: true,
     liveReload: true,
-    watchFiles: './src',
   },
 };

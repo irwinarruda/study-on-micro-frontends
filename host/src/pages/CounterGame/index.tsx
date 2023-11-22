@@ -2,7 +2,7 @@ import React from 'react';
 import { observer } from 'mobx-react-lite';
 
 import { Box, Button } from '@mui/material';
-import { useStore } from '@app/providers/Store';
+import { useStore } from 'host/Store';
 import { Counter } from 'header/Counter';
 import { render as vueRender } from 'form/render';
 import { render as svelteRender } from 'games/render';
@@ -28,10 +28,13 @@ export const CounterGame = observer(() => {
         width: '100%',
         maxWidth: '600px',
         margin: '0 auto',
-        paddingX: 3,
+        px: 3,
+        pt: 4,
       }}
     >
-      <Button onClick={store.counter.increment}>Increment {store.counter.count}</Button>
+      <Button variant="contained" onClick={store.counter.increment}>
+        Internal increment {store.counter.count}
+      </Button>
       <Counter />
       <div ref={vueRef}></div>
       <div ref={svelteRef}></div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { ThemeProvider, GlobalStyles, CssBaseline } from '@mui/material';
 
-import { Header } from '@app/components/Header';
+import { Counter } from '@app/components/Counter';
 import { theme } from '@app/styles/theme';
 import { global } from '@app/styles/global';
 
@@ -14,7 +14,7 @@ export const App = ({}: AppProps) => {
     <ThemeProvider theme={theme}>
       <GlobalStyles styles={global as any} />
       <CssBaseline />
-      <Header />
+      <Counter />
     </ThemeProvider>
   );
 };

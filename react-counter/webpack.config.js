@@ -37,8 +37,7 @@ module.exports = {
         host: 'host@http://localhost:3000/remoteEntry.js',
       },
       exposes: {
-        './Counter': './src/shared/components/Counter',
-        './Header': './src/shared/components/Header',
+        './Counter': './src/components/Counter',
       },
       shared: [
         {
