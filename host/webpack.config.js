@@ -34,9 +34,9 @@ module.exports = {
       filename: 'remoteEntry.js',
       remotes: {
         host: 'host@http://localhost:3000/remoteEntry.js',
-        header: 'header@http://localhost:3001/remoteEntry.js',
-        form: 'form@http://localhost:3002/remoteEntry.js',
-        games: 'games@http://localhost:3003/remoteEntry.js',
+        react: 'react@http://localhost:3001/remoteEntry.js',
+        vue: 'vue@http://localhost:3002/remoteEntry.js',
+        svelte: 'svelte@http://localhost:3003/remoteEntry.js',
       },
       exposes: {
         './Store': './src/providers/Store',
@@ -98,7 +98,5 @@ module.exports = {
     hot: true,
     historyApiFallback: true,
     port: 3000,
-    // Importante para ouvir mudanças e atualizar
-    liveReload: true,
   },
 };

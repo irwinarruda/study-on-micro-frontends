@@ -1,4 +1,3 @@
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const ModuleFederationPlugin = require('webpack').container.ModuleFederationPlugin;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TsConfig = require('./tsconfig.json');
@@ -31,7 +30,7 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: 'header',
+      name: 'react',
       filename: 'remoteEntry.js',
       remotes: {
         host: 'host@http://localhost:3000/remoteEntry.js',

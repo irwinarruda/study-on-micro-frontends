@@ -43,7 +43,7 @@ module.exports = {
       filename: '[name].css',
     }),
     new ModuleFederationPlugin({
-      name: 'games',
+      name: 'svelte',
       filename: 'remoteEntry.js',
       exposes: {
         './render': './src/utils/render',

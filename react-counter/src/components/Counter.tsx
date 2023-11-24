@@ -4,11 +4,7 @@ import { observer } from 'mobx-react-lite';
 
 import { useStore } from 'host/Store';
 
-type CounterProps = {
-  children?: React.ReactNode;
-};
-
-export const Counter = observer(({}: CounterProps) => {
+export const Counter = observer(() => {
   const { counter } = useStore();
 
   return (

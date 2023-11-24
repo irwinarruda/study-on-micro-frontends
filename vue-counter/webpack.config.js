@@ -31,7 +31,7 @@ module.exports = {
   plugins: [
     new VueLoaderPlugin(),
     new ModuleFederationPlugin({
-      name: 'form',
+      name: 'vue',
       filename: 'remoteEntry.js',
       shared: {
         ...PackageJsonDeps,

@@ -12,13 +12,11 @@
   let { counter } = useStore();
 
   let count: number;
-  let increment: () => void;
-  let decrement: () => void;
+  function increment() { counter.increment() };
+  function decrement() { counter.decrement() };
 
   autorun(() => {
     count = counter.count;
-    increment = counter.increment;
-    decrement = counter.decrement;
   });
 </script>
 

@@ -11,23 +11,12 @@ const CounterGame = React.lazy(async () => ({
   ).CounterGame,
 }));
 
-const Home = React.lazy(async () => ({
-  default: (
-    await import(
-      /* webpackPrefetch: true */
-      /* webpackChunkName: 'Home' */
-      '@pages/Home'
-    )
-  ).Home,
-}));
-
 export const Router = () => {
   return (
     <BrowserRouter>
       <React.Suspense fallback="loading...">
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/counter" element={<CounterGame />} />
+          <Route path="/" element={<CounterGame />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </React.Suspense>
