@@ -1,6 +1,6 @@
-# <img src="./assets/icon-module-federation.png" height="50pd" align="center" /> Sudy on Micro Front-ends
+# <img src="./assets/icon-module-federation.png" height="50pd" align="center" /> Study on Micro Front-ends
 
-This repository contains my sudies on Micro Front-ends using [Module Federation](https://webpack.js.org/concepts/module-federation/)
+This repository contains my studies on Micro Front-ends using [Module Federation](https://webpack.js.org/concepts/module-federation/)
 
 <p align="center">
     <img width="450px" src="./assets/gif-counter.gif" />
@@ -151,7 +151,7 @@ export function render(element: string) {
 }
 ```
 
-The end result at the `host` app is something like:
+The end result at the `host` app is something like this:
 
 ```tsx
 import { Counter } from 'react/Counter';
@@ -185,7 +185,7 @@ export const CounterGame = () => {
 
 But what if we want to share the `count` state so that all the Counter Widgets change at the same time? For that, we have to use some global state manager solution.
 
-Because `React Context`, `Vuex`, or `Svelte writable` are framework sepcific, we have to find a generic **State Manager** that works on every framework. The easiest one to use I could find is `Mobx State-Tree`.
+Because `React Context`, `Vuex`, or `Svelte writable` are framework specific, we have to find a generic **State Manager** that works on every framework. The easiest one to use I could find is `Mobx State-Tree`.
 
 ```ts
 import { types } from 'mobx-state-tree';
@@ -356,7 +356,7 @@ But I honestly don't know if there is a better solution...
 
 ## Developer Experience
 
-The developer experience is different. Since **Module Federation** works with runtime injection of Javascript, tools like **Hot Module Replacement (HMR)** are not that great, especially when working with different frameworks. The good news is that the host app can have hot reload, just the remote components that cannot have.
+The developer experience is different. Since **Module Federation** works with runtime injection of Javascript, tools like **Hot Module Replacement (HMR)** are not that great, especially when working with different frameworks. The good news is that the host app can have hot reload, just the remote components cannot.
 
 ## Conclusion
 
