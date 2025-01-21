@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 
 import { Box, Button } from '@mui/material';
 import { useStore } from 'host/Store';
-import { Counter } from 'react/Counter';
+import { Counter } from 'reactApp/Counter';
 import { render as vueRender } from 'vue/render';
 import { render as svelteRender } from 'svelte/render';
 

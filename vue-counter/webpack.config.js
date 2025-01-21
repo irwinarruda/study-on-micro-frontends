@@ -1,4 +1,5 @@
-const ModuleFederationPlugin = require('webpack').container.ModuleFederationPlugin;
+const { ModuleFederationPlugin } = require('@module-federation/enhanced/webpack');
+// const ModuleFederationPlugin = require('webpack').container.ModuleFederationPlugin;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
 const TsConfig = require('./tsconfig.json');
@@ -27,17 +28,22 @@ module.exports = {
     path: path.join(__dirname, 'dist'),
     filename: '[name]-[contenthash].js',
     clean: true,
+    publicPath: 'http://localhost:3002/',
   },
   plugins: [
     new VueLoaderPlugin(),
     new ModuleFederationPlugin({
       name: 'vue',
       filename: 'remoteEntry.js',
+      dts: false,
+      experiments: {
+        federationRuntime: 'hoisted',
+      },
       shared: {
         ...PackageJsonDeps,
         mobx: {
           singleton: true,
-          requiredVersion: PackageJsonDeps.mobx,
+          version: PackageJsonDeps.mobx,
         },
       },
       remotes: {
@@ -110,11 +116,15 @@ module.exports = {
     static: {
       directory: path.join(__dirname, 'public'),
     },
+    open: false,
     hot: 'only',
     liveReload: true,
     port: 3002,
     historyApiFallback: true,
     liveReload: true,
     watchFiles: './src',
+  },
+  optimization: {
+    runtimeChunk: 'single',
   },
 };

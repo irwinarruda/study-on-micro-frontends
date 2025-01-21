@@ -1,4 +1,5 @@
-const ModuleFederationPlugin = require('webpack').container.ModuleFederationPlugin;
+const { ModuleFederationPlugin } = require('@module-federation/enhanced/webpack');
+// const ModuleFederationPlugin = require('webpack').container.ModuleFederationPlugin;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TsConfig = require('./tsconfig.json');
 const PackageJson = require('./package.json');
@@ -27,14 +28,19 @@ module.exports = {
     filename: '[name]-[contenthash].js',
     // Clean dist file before build
     clean: true,
+    publicPath: 'http://localhost:3000/',
   },
   plugins: [
     new ModuleFederationPlugin({
       name: 'host',
       filename: 'remoteEntry.js',
+      dts: false,
+      experiments: {
+        federationRuntime: 'hoisted',
+      },
       remotes: {
         host: 'host@http://localhost:3000/remoteEntry.js',
-        react: 'react@http://localhost:3001/remoteEntry.js',
+        reactApp: 'react@http://localhost:3001/remoteEntry.js',
         vue: 'vue@http://localhost:3002/remoteEntry.js',
         svelte: 'svelte@http://localhost:3003/remoteEntry.js',
       },
@@ -42,21 +48,25 @@ module.exports = {
         './Store': './src/providers/Store',
       },
       shared: {
-        ...PackageJsonDeps,
         // './src/providers/Store': {
         //   singleton: true,
         // },
+        ...PackageJsonDeps,
         mobx: {
           singleton: true,
-          requiredVersion: PackageJsonDeps.mobx,
+          version: PackageJsonDeps.mobx,
+        },
+        ['mobx-state-tree']: {
+          singleton: true,
+          version: PackageJsonDeps['mobx-state-tree'],
         },
         react: {
           singleton: true,
-          requiredVersion: PackageJsonDeps.react,
+          version: PackageJsonDeps.react,
         },
         ['react-dom']: {
           singleton: true,
-          requiredVersion: PackageJsonDeps['react-dom'],
+          version: PackageJsonDeps['react-dom'],
         },
       },
     }),
@@ -94,9 +104,12 @@ module.exports = {
       directory: path.join(__dirname, 'public'),
     },
     // Open on yarn dev
-    open: true,
+    open: false,
     hot: true,
     historyApiFallback: true,
     port: 3000,
+  },
+  optimization: {
+    runtimeChunk: 'single',
   },
 };

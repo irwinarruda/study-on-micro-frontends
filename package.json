@@ -1,0 +1,22 @@
+{
+  "name": "study-on-micro-frontends",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "irwinarruda",
+  "license": "MIT",
+  "scripts": {
+    "host": "cd host && pnpm",
+    "react": "cd react-counter && pnpm",
+    "svelte": "cd svelte-counter && pnpm",
+    "vue": "cd vue-counter && pnpm",
+    "dev": "concurrently \"pnpm host dev\" \"pnpm react dev\" \"pnpm svelte dev\" \"pnpm vue dev\"",
+    "dev:mf": "concurrently \"pnpm react dev\" \"pnpm svelte dev\" \"pnpm vue dev\"",
+    "build": "concurrently \"pnpm host build\" \"pnpm react build\" \"pnpm svelte build\" \"pnpm vue build\"",
+    "clean": "concurrently \"rm -rf node_modules && rm -rf dist\" \"pnpm host clean\" \"pnpm react clean\" \"pnpm svelte clean\" \"pnpm vue clean\"",
+    "postinstall": "concurrently \"pnpm host install\" \"pnpm react install\" \"pnpm svelte install\" \"pnpm vue install\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  },
+  "packageManager": "pnpm@9.15.4+sha1.ffa0b5c573381e8035b354028ccff97c8e452047"
+}

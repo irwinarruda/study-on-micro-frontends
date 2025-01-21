@@ -1,4 +1,4 @@
-declare module 'react/Counter' {
+declare module 'reactApp/Counter' {
   const Counter: React.FC;
   return { Counter };
 }

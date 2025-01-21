@@ -6,6 +6,7 @@ export const Counter = types
   })
   .actions(self => ({
     increment() {
+      console.log('incremented', self.count);
       self.count++;
     },
     decrement() {

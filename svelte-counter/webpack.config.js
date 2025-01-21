@@ -1,4 +1,5 @@
-const ModuleFederationPlugin = require('webpack').container.ModuleFederationPlugin;
+const { ModuleFederationPlugin } = require('@module-federation/enhanced/webpack');
+// const ModuleFederationPlugin = require('webpack').container.ModuleFederationPlugin;
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const SveltePreprocess = require('svelte-preprocess');
@@ -31,6 +32,7 @@ module.exports = {
     path: path.join(__dirname, 'dist'),
     filename: '[name]-[contenthash].js',
     clean: true,
+    publicPath: 'http://localhost:3003/',
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -45,6 +47,10 @@ module.exports = {
     new ModuleFederationPlugin({
       name: 'svelte',
       filename: 'remoteEntry.js',
+      dts: false,
+      experiments: {
+        federationRuntime: 'hoisted',
+      },
       exposes: {
         './render': './src/utils/render',
       },
@@ -90,15 +96,14 @@ module.exports = {
       {
         // required to prevent errors from Svelte on Webpack 5+
         test: /node_modules\/svelte\/.*\.mjs$/,
-        resolve: {
-          fullySpecified: false,
-        },
+        resolve: { fullySpecified: false },
       },
     ],
   },
   resolve: {
     alias: TsConfigPaths,
     extensions: ['.ts', '.js', '.svelte'],
+    conditionNames: ['svelte', 'require', 'node'],
   },
   devtool: 'source-map',
   devServer: {
@@ -106,9 +111,12 @@ module.exports = {
       directory: path.join(__dirname, 'public'),
     },
     port: 3003,
-    open: true,
+    open: false,
     historyApiFallback: true,
     hot: true,
     liveReload: true,
+  },
+  optimization: {
+    runtimeChunk: 'single',
   },
 };
